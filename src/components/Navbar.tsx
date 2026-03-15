@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 const links = [
-  { href: '#sobre', label: 'Quem Somos' },
-  { href: '#pilares', label: 'Pilares' },
-  { href: '#servicos', label: 'Serviços' },
-  { href: '#como-funciona', label: 'Como Funciona' },
-  { href: '#contato', label: 'Contato' },
+  { href: '/quem-somos', label: 'Quem Somos' },
+  { href: '/pilares', label: 'Pilares' },
+  { href: '/servicos', label: 'Serviços' },
+  { href: '/como-funciona', label: 'Como Funciona' },
+  { href: '/contato', label: 'Contato' },
 ]
 
 export default function Navbar() {
@@ -38,7 +38,7 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#home" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
             <div style={{ width: 36, height: 36, borderRadius: 8, overflow: 'hidden', border: '1px solid rgba(0,255,255,.15)', flexShrink: 0 }}>
-              <Image src="/logo.jpeg" alt="Housing PRO" width={36} height={36} style={{ objectFit: 'contain', width: '100%', height: '100%' }} />
+              <Image src="/logo.png" alt="Housing PRO" width={36} height={36} style={{ objectFit: 'contain', width: '100%', height: '100%' }} />
             </div>
             <div>
               <div style={{ color: '#fff', fontWeight: 700, fontSize: 15, letterSpacing: '.02em' }}>
