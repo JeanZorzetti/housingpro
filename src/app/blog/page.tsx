@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { siteConfig } from '@/config/site'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { getAllPosts, getCategories } from '@/lib/mdx'
@@ -6,6 +7,7 @@ import { getAllPosts, getCategories } from '@/lib/mdx'
 export const metadata: Metadata = {
   title: 'Blog — Housing PRO',
   description: 'Insights sobre Performance Marketing, Data Engineering, AI Automation e Growth. Conteúdo técnico e estratégico para empresas que querem crescer com dados.',
+  alternates: { canonical: `${siteConfig.url}/blog` },
 }
 
 const categoryColors: Record<string, string> = {

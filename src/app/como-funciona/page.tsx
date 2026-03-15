@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { siteConfig } from '@/config/site'
 import Navbar from '@/components/Navbar'
 import PageHero from '@/components/PageHero'
 import RevealObserver from '@/components/RevealObserver'
@@ -7,6 +8,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Como Funciona — Housing PRO',
   description: 'Do diagnóstico à escala em 3 etapas. Conheça o processo comprovado da Housing PRO para construir e otimizar ecossistemas digitais de alta performance.',
+  alternates: { canonical: `${siteConfig.url}/como-funciona` },
 }
 
 const steps = [

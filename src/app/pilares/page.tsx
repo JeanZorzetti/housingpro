@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { siteConfig } from '@/config/site'
 import Navbar from '@/components/Navbar'
 import PageHero from '@/components/PageHero'
 import RevealObserver from '@/components/RevealObserver'
@@ -7,6 +8,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Nossos Pilares — Housing PRO',
   description: 'Três fundações estratégicas que sustentam todo ecossistema que construímos: Marketing de Precisão, Infraestrutura Tech e Inteligência Artificial.',
+  alternates: { canonical: `${siteConfig.url}/pilares` },
 }
 
 const pillars = [

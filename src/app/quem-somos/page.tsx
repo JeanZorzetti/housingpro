@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { siteConfig } from '@/config/site'
 import Navbar from '@/components/Navbar'
 import PageHero from '@/components/PageHero'
 import RevealObserver from '@/components/RevealObserver'
@@ -7,6 +8,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Quem Somos — Housing PRO',
   description: 'Conheça a Housing PRO: a empresa que une MarTech, Engenharia de Dados e IA para construir o sistema nervoso digital da sua empresa.',
+  alternates: { canonical: `${siteConfig.url}/quem-somos` },
 }
 
 const checks = ['MarTech Integrado', 'IA Aplicada', 'Data-Driven', 'Resultados Mensuráveis', 'Escalabilidade', 'Suporte 24/7']

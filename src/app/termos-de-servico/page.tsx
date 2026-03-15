@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
+import { siteConfig } from '@/config/site'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Termos de Serviço — Housing PRO',
   description: 'Leia os Termos de Serviço da Housing PRO. Condições de uso, responsabilidades e direitos das partes.',
+  alternates: { canonical: `${siteConfig.url}/termos-de-servico` },
 }
 
 const sections = [

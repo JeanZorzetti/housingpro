@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
+import { siteConfig } from '@/config/site'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
   title: 'Política de Privacidade — Housing PRO',
   description: 'Saiba como a Housing PRO coleta, usa, armazena e protege seus dados pessoais, em conformidade com a LGPD.',
+  alternates: { canonical: `${siteConfig.url}/politica-de-privacidade` },
 }
 
 const sections = [

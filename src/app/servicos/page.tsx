@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { siteConfig } from '@/config/site'
 import Navbar from '@/components/Navbar'
 import PageHero from '@/components/PageHero'
 import RevealObserver from '@/components/RevealObserver'
@@ -7,6 +8,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   title: 'Serviços — Housing PRO',
   description: 'Performance Marketing, Data Engineering, AI Automation e Growth Hacking. Soluções end-to-end para escalar seu negócio com tecnologia e IA.',
+  alternates: { canonical: `${siteConfig.url}/servicos` },
 }
 
 const services = [

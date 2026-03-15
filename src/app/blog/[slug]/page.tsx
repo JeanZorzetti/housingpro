@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Callout from '@/components/mdx/Callout'
 import { getAllSlugs, getPost } from '@/lib/mdx'
+import { siteConfig } from '@/config/site'
 
 export async function generateStaticParams() {
   return getAllSlugs().map(slug => ({ slug }))
@@ -16,16 +17,17 @@ export async function generateMetadata(
   const { slug } = await params
   const post = getPost(slug)
   if (!post) return { title: 'Post não encontrado — Housing PRO' }
-  const BASE_URL = 'https://housingpro-tau.vercel.app'
+  const url = `${siteConfig.url}/blog/${post.slug}`
   return {
     title: `${post.title} — Housing PRO Blog`,
     description: post.description,
     robots: post.noindex ? 'noindex,nofollow' : 'index,follow',
-    alternates: { canonical: `${BASE_URL}/blog/${post.slug}` },
+    alternates: { canonical: url },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
+      url,
       publishedTime: post.date,
       modifiedTime: post.lastModified ?? post.date,
       authors: [post.author.name],
