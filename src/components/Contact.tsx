@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-type FormState = 'idle' | 'loading' | 'success'
+type FormState = 'idle' | 'loading' | 'success' | 'error'
 
 export default function Contact() {
   const [state, setState] = useState<FormState>('idle')
@@ -11,10 +11,23 @@ export default function Contact() {
   const handle = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     setState('loading')
-    setTimeout(() => setState('success'), 1800)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, source: 'home' }),
+      })
+      if (res.ok) {
+        setState('success')
+      } else {
+        setState('error')
+      }
+    } catch {
+      setState('error')
+    }
   }
 
   return (
@@ -92,6 +105,17 @@ export default function Contact() {
                     Obrigado, <strong style={{ color: '#00ffff' }}>{form.name}</strong>!<br />
                     Nossa equipe entrará em contato em até 24 horas.
                   </p>
+                </div>
+              ) : state === 'error' ? (
+                <div style={{ textAlign: 'center', padding: '40px 0' }}>
+                  <div style={{ fontSize: '3rem', marginBottom: 16 }}>⚠️</div>
+                  <h3 style={{ fontSize: 22, fontWeight: 700, color: '#fff', marginBottom: 12 }}>Erro ao enviar</h3>
+                  <p style={{ color: 'rgba(255,255,255,.5)', fontSize: 15, lineHeight: 1.7, marginBottom: 20 }}>
+                    Tente novamente ou envie um e-mail para <strong style={{ color: '#00ffff' }}>contato@housingpro.tech</strong>.
+                  </p>
+                  <button onClick={() => setState('idle')} className="btn-cyan" style={{ padding: '10px 24px', borderRadius: 10, fontSize: 14, border: 'none', cursor: 'pointer' }}>
+                    Tentar novamente
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

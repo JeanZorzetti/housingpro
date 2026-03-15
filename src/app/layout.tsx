@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { siteConfig } from '@/config/site'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: 'Housing PRO — Ecossistemas Digitais',
   description: 'MarTech e IA para escalar resultados. Ecossistemas Digitais de alta performance.',
   openGraph: {
