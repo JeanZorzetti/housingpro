@@ -1,12 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getResend, FROM_ADDRESS, NOTIFY_ADDRESS } from '@/lib/resend'
+import { getContactRatelimit } from '@/lib/ratelimit'
 import ContactNotification from '@/emails/ContactNotification'
 import ContactConfirmation from '@/emails/ContactConfirmation'
 import { createElement } from 'react'
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting (only when Upstash is configured)
+    if (process.env.UPSTASH_REDIS_REST_URL) {
+      const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'anonymous'
+      const { success, limit, remaining } = await getContactRatelimit().limit(ip)
+
+      if (!success) {
+        return NextResponse.json(
+          { error: 'Muitas tentativas. Tente novamente em alguns minutos.' },
+          {
+            status: 429,
+            headers: {
+              'X-RateLimit-Limit': String(limit),
+              'X-RateLimit-Remaining': String(remaining),
+            },
+          }
+        )
+      }
+    }
+
     const body = await request.json()
     const { name, email, company, phone, interest, message, source } = body
 
