@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { ClerkProvider } from '@clerk/nextjs'
 import { siteConfig } from '@/config/site'
 import './globals.css'
 
@@ -18,8 +19,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={inter.variable}>
-      <body className="antialiased">{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="pt-BR" className={inter.variable}>
+        <body className="antialiased">{children}</body>
+      </html>
+    </ClerkProvider>
   )
 }
