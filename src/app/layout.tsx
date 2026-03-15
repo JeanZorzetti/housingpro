@@ -18,11 +18,14 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <ClerkProvider>
-      <html lang="pt-BR" className={inter.variable}>
-        <body className="antialiased">{children}</body>
-      </html>
-    </ClerkProvider>
+  const html = (
+    <html lang="pt-BR" className={inter.variable}>
+      <body className="antialiased">{children}</body>
+    </html>
   )
+
+  // ClerkProvider only when keys are configured — /admin won't work without them
+  return process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+    ? <ClerkProvider>{html}</ClerkProvider>
+    : html
 }
