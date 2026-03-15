@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { posts, categories } from '@/data/posts'
+import { getAllPosts, getCategories } from '@/lib/mdx'
 
 export const metadata: Metadata = {
   title: 'Blog — Housing PRO',
@@ -13,8 +13,8 @@ const categoryColors: Record<string, string> = {
   'Data Engineering': '#3b82f6',
   'AI Automation': '#8b5cf6',
   'Growth Hacking': '#10b981',
-  'Privacidade & Compliance': '#ef4444',
-  'Cultura & Times': '#ec4899',
+  'MarTech': '#ef4444',
+  'Estratégia': '#ec4899',
 }
 
 const categoryEmoji: Record<string, string> = {
@@ -22,11 +22,13 @@ const categoryEmoji: Record<string, string> = {
   'Data Engineering': '🗄️',
   'AI Automation': '🤖',
   'Growth Hacking': '🚀',
-  'Privacidade & Compliance': '🔒',
-  'Cultura & Times': '👥',
+  'MarTech': '🔒',
+  'Estratégia': '👥',
 }
 
 export default function BlogPage() {
+  const posts = getAllPosts()
+  const categories = getCategories()
   const featured = posts[0]
   const rest = posts.slice(1)
 
@@ -84,7 +86,6 @@ export default function BlogPage() {
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
               }}>
-                {/* Visual side */}
                 <div style={{
                   background: 'linear-gradient(135deg, rgba(0,0,51,1) 0%, rgba(0,30,60,1) 100%)',
                   minHeight: 280,
@@ -96,25 +97,19 @@ export default function BlogPage() {
                 }}>
                   <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at 30% 50%, rgba(0,255,255,.08) 0%, transparent 60%)' }} />
                   <div style={{ textAlign: 'center', position: 'relative', padding: 32 }}>
-                    <div style={{ fontSize: 56, marginBottom: 12 }}>
-                      {categoryEmoji[featured.category] || '📊'}
-                    </div>
+                    <div style={{ fontSize: 56, marginBottom: 12 }}>{categoryEmoji[featured.category] ?? '📝'}</div>
                     <span style={{ display: 'inline-block', padding: '4px 14px', borderRadius: 999, fontSize: 12, fontWeight: 600, background: 'rgba(0,255,255,.12)', border: '1px solid rgba(0,255,255,.25)', color: '#00ffff' }}>
                       Destaque
                     </span>
                   </div>
                 </div>
-                {/* Text side */}
                 <div style={{ padding: '36px 40px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
                     <span style={{
-                      padding: '3px 10px',
-                      borderRadius: 999,
-                      fontSize: 11,
-                      fontWeight: 600,
-                      background: `${categoryColors[featured.category] || '#00ffff'}20`,
-                      color: categoryColors[featured.category] || '#00ffff',
-                      border: `1px solid ${categoryColors[featured.category] || '#00ffff'}40`,
+                      padding: '3px 10px', borderRadius: 999, fontSize: 11, fontWeight: 600,
+                      background: `${categoryColors[featured.category] ?? '#00ffff'}20`,
+                      color: categoryColors[featured.category] ?? '#00ffff',
+                      border: `1px solid ${categoryColors[featured.category] ?? '#00ffff'}40`,
                     }}>
                       {featured.category}
                     </span>
@@ -133,7 +128,7 @@ export default function BlogPage() {
                       </div>
                       <div>
                         <div style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>{featured.author.name}</div>
-                        <div style={{ fontSize: 11, color: 'rgba(255,255,255,.35)' }}>{featured.date}</div>
+                        <div style={{ fontSize: 11, color: 'rgba(255,255,255,.35)' }}>{featured.dateFormatted}</div>
                       </div>
                     </div>
                     <span style={{ color: '#00ffff', fontSize: 13, fontWeight: 600 }}>Ler artigo →</span>
@@ -146,39 +141,23 @@ export default function BlogPage() {
             <div className="blog-grid">
               {rest.map(post => (
                 <a key={post.slug} href={`/blog/${post.slug}`} style={{ textDecoration: 'none' }}>
-                  <article className="blog-post-card glass-card" style={{
-                    borderRadius: 16,
-                    overflow: 'hidden',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                  }}>
-                    {/* Card header */}
+                  <article className="blog-post-card glass-card" style={{ borderRadius: 16, overflow: 'hidden', height: '100%', display: 'flex', flexDirection: 'column' }}>
                     <div style={{
                       height: 120,
                       background: 'linear-gradient(135deg, rgba(0,10,40,1) 0%, rgba(0,20,60,1) 100%)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      position: 'relative',
-                      overflow: 'hidden',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      position: 'relative', overflow: 'hidden',
                     }}>
-                      <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse at 50% 50%, ${categoryColors[post.category] || '#00ffff'}10 0%, transparent 70%)` }} />
-                      <span style={{ fontSize: 36, position: 'relative' }}>
-                        {categoryEmoji[post.category] || '📝'}
-                      </span>
+                      <div style={{ position: 'absolute', inset: 0, background: `radial-gradient(ellipse at 50% 50%, ${categoryColors[post.category] ?? '#00ffff'}10 0%, transparent 70%)` }} />
+                      <span style={{ fontSize: 36, position: 'relative' }}>{categoryEmoji[post.category] ?? '📝'}</span>
                     </div>
-                    {/* Card body */}
                     <div style={{ padding: '20px 22px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
                         <span style={{
-                          padding: '2px 9px',
-                          borderRadius: 999,
-                          fontSize: 10,
-                          fontWeight: 600,
-                          background: `${categoryColors[post.category] || '#00ffff'}15`,
-                          color: categoryColors[post.category] || '#00ffff',
-                          border: `1px solid ${categoryColors[post.category] || '#00ffff'}30`,
+                          padding: '2px 9px', borderRadius: 999, fontSize: 10, fontWeight: 600,
+                          background: `${categoryColors[post.category] ?? '#00ffff'}15`,
+                          color: categoryColors[post.category] ?? '#00ffff',
+                          border: `1px solid ${categoryColors[post.category] ?? '#00ffff'}30`,
                         }}>
                           {post.category}
                         </span>
@@ -195,7 +174,7 @@ export default function BlogPage() {
                           <div style={{ width: 26, height: 26, borderRadius: '50%', background: 'linear-gradient(135deg, #00ffff, #0099cc)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, fontWeight: 700, color: '#000033' }}>
                             {post.author.initials}
                           </div>
-                          <span style={{ fontSize: 11, color: 'rgba(255,255,255,.4)' }}>{post.date}</span>
+                          <span style={{ fontSize: 11, color: 'rgba(255,255,255,.4)' }}>{post.dateFormatted}</span>
                         </div>
                         <span style={{ color: '#00ffff', fontSize: 12, fontWeight: 600 }}>Ler →</span>
                       </div>
@@ -229,30 +208,12 @@ export default function BlogPage() {
       </footer>
 
       <style>{`
-        .blog-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-          gap: 24px;
-        }
-        .blog-featured-card {
-          transition: border-color .25s, transform .25s;
-        }
-        .blog-featured-link:hover .blog-featured-card {
-          border-color: rgba(0,255,255,.3) !important;
-          transform: translateY(-2px);
-        }
-        .blog-post-card {
-          transition: border-color .25s, transform .25s;
-        }
-        a:hover .blog-post-card {
-          border-color: rgba(0,255,255,.25) !important;
-          transform: translateY(-3px);
-        }
-        @media (max-width: 768px) {
-          .blog-featured-card {
-            grid-template-columns: 1fr !important;
-          }
-        }
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+        .blog-featured-card { transition: border-color .25s, transform .25s; }
+        .blog-featured-link:hover .blog-featured-card { border-color: rgba(0,255,255,.3) !important; transform: translateY(-2px); }
+        .blog-post-card { transition: border-color .25s, transform .25s; }
+        a:hover .blog-post-card { border-color: rgba(0,255,255,.25) !important; transform: translateY(-3px); }
+        @media (max-width: 768px) { .blog-featured-card { grid-template-columns: 1fr !important; } }
       `}</style>
     </>
   )

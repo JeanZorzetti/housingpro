@@ -1,0 +1,62 @@
+---
+title: "Data stack moderno para médias empresas: do zero ao insight em 8 semanas"
+excerpt: "A maioria das médias empresas opera com dados espalhados em dezenas de ferramentas desconectadas. Neste guia, mostramos a arquitetura que implementamos para unificar tudo — e os resultados que isso gera."
+category: "Data Engineering"
+readTime: "9 min"
+date: "2026-03-03"
+author:
+  name: "Juliana Ferreira"
+  role: "CTO & Co-Founder"
+  initials: "JF"
+tags:
+  - Data Stack
+  - BigQuery
+  - dbt
+  - Analytics
+  - Data Engineering
+---
+
+Quando começamos a trabalhar com uma nova empresa, a primeira pergunta que fazemos é: "Onde estão seus dados?" A resposta quase sempre é a mesma: "Em todo lugar."
+
+Google Analytics aqui. CRM ali. Planilha do gestor de tráfego num Google Drive. Dashboard do financeiro em outro sistema. E ninguém consegue responder uma pergunta simples como: "Qual canal trouxe os clientes mais valiosos do último trimestre?"
+
+## A arquitetura que funciona
+
+Depois de implementar data stacks para dezenas de empresas, chegamos a uma arquitetura padrão que equilibra robustez, custo e velocidade de implementação:
+
+- **Ingestão:** Fivetran ou Airbyte para conectar as fontes sem código
+- **Armazenamento:** BigQuery (Google Cloud) ou Snowflake como data warehouse central
+- **Transformação:** dbt para modelar os dados em camadas (raw → staging → marts)
+- **Visualização:** Looker Studio (gratuito) ou Metabase (self-hosted) para dashboards
+- **Orquestração:** Airflow ou Cloud Composer para pipelines mais complexos
+
+## As 4 camadas de dados
+
+### Camada 1: Raw (dados brutos)
+
+Todos os dados chegam aqui sem transformação. É a fonte da verdade. Nunca altere dados nessa camada — apenas adicione.
+
+### Camada 2: Staging (padronização)
+
+Aqui os dados são limpos, renomeados e padronizados. Um lead do HubSpot e um lead do RD Station passam a ter o mesmo schema.
+
+### Camada 3: Intermediate (lógica de negócio)
+
+Joins, agregações e cálculos intermediários. É aqui que definimos o que é uma "sessão", um "lead qualificado" ou uma "conversão" para o seu negócio.
+
+### Camada 4: Marts (dados prontos para consumo)
+
+Tabelas finais, desnormalizadas, prontas para os dashboards e para as ferramentas de BI. Cada mart tem um "dono" — marketing, vendas, financeiro.
+
+<Callout>Com essa arquitetura, qualquer analista consegue responder qualquer pergunta de negócio em minutos — sem depender de TI ou de um cientista de dados.</Callout>
+
+## Cronograma realista: 8 semanas
+
+- Semanas 1-2: mapeamento de fontes, setup de BigQuery e primeiras conexões via Fivetran
+- Semanas 3-4: modelagem dbt das fontes prioritárias (ads + CRM)
+- Semanas 5-6: construção dos marts de marketing e vendas
+- Semanas 7-8: dashboards executivos e treinamento da equipe
+
+## O que muda depois
+
+Os clientes que implementam essa arquitetura tipicamente relatam: redução de 70% no tempo gasto em relatórios manuais, capacidade de responder perguntas estratégicas em tempo real, e uma mudança cultural — a empresa passa de "achismo" para cultura data-driven de verdade.

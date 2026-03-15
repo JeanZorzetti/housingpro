@@ -1,0 +1,59 @@
+---
+title: "Agentes de IA para qualificação de leads: como automatizamos 80% do processo"
+excerpt: "Qualificar leads manualmente é caro, lento e inconsistente. Veja como construímos agentes de IA que qualificam, nutrem e encaminham leads para o time comercial — com taxa de acerto superior à de SDRs humanos."
+category: "AI Automation"
+readTime: "8 min"
+date: "2026-02-24"
+author:
+  name: "Ricardo Nunes"
+  role: "Head de IA"
+  initials: "RN"
+tags:
+  - IA
+  - LLMs
+  - Automação
+  - Qualificação
+  - SDR
+  - n8n
+---
+
+Um SDR (Sales Development Representative) humano consegue processar, em média, 50 a 80 leads por dia. Ele fica cansado, comete erros de consistência, tem dias ruins. E custa entre R$ 4.000 e R$ 8.000/mês — fora encargos.
+
+Um agente de IA bem construído processa 500 leads por hora, é consistente 24/7, aprende com cada interação e custa uma fração disso. Não estamos falando do futuro — estamos fazendo isso agora.
+
+## O que é um agente de qualificação?
+
+Diferente de um chatbot tradicional (que segue um fluxo rígido), um agente de IA usa um LLM (Large Language Model) para compreender intenção, fazer perguntas contextuais, interpretar respostas abertas e tomar decisões com base em um conjunto de regras e dados.
+
+<Callout>A diferença entre um chatbot e um agente: o chatbot segue um script. O agente pensa.</Callout>
+
+## A arquitetura que implementamos
+
+### 1. Trigger de entrada
+
+O agente é ativado quando um lead preenche um formulário, envia mensagem no WhatsApp, abre um e-mail ou entra em uma landing page. Todos esses canais são unificados via n8n.
+
+### 2. Enriquecimento automático
+
+Antes de qualquer interação, o agente enriquece o lead com dados públicos: LinkedIn, CNPJ (para B2B), histórico de interações com a empresa, segmento de mercado.
+
+### 3. Qualificação conversacional
+
+O agente inicia uma conversa natural — via WhatsApp ou e-mail — fazendo as perguntas do framework BANT (Budget, Authority, Need, Timeline) de forma fluida, sem parecer um interrogatório.
+
+### 4. Scoring e roteamento
+
+Com base nas respostas e nos dados de enriquecimento, o agente atribui um score ao lead e o roteia: hot leads vão direto para o time de vendas com um briefing completo; leads frios entram em um fluxo de nutrição automático.
+
+## Resultados de uma implementação real
+
+- Taxa de qualificação: 78% dos leads que chegam ao agente são classificados corretamente (vs. 65% do time humano anterior)
+- Tempo de resposta: de 4 horas (média humana) para 2 minutos
+- Custo por lead qualificado: redução de 60%
+- Volume processado: de 200 para 1.400 leads/mês com a mesma estrutura
+
+## O que o agente não substitui
+
+Queremos ser honestos: o agente não substitui toda a função de SDR. Negociações complexas, objeções sofisticadas e o momento de "fechar a reunião" com um lead muito qualificado ainda são melhor conduzidos por humanos. O agente libera o time para focar exatamente nesses momentos.
+
+<Callout>A pergunta não é "IA vai substituir meu time de vendas?" — é "como meu time de vendas vai usar IA para ser 5x mais produtivo?"</Callout>
