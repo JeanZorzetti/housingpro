@@ -35,7 +35,7 @@ export default function ContatoPage() {
     e.preventDefault()
     setState('loading')
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, source: 'contato' }),

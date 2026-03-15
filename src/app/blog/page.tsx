@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { siteConfig } from '@/config/site'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import BlogSearch from '@/components/BlogSearch'
 import { getAllPosts, getCategories } from '@/lib/mdx'
 
 export const metadata: Metadata = {
@@ -60,6 +61,9 @@ export default function BlogPage() {
         {/* Content */}
         <section className="grid-bg" style={{ padding: '72px 0 96px' }}>
           <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
+
+            {/* Semantic search */}
+            <BlogSearch />
 
             {/* Category pills */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 56, justifyContent: 'center' }}>
