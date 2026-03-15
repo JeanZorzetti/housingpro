@@ -15,7 +15,7 @@ export default function Footer() {
     <div style={{ paddingTop: 40, borderTop: '1px solid rgba(255,255,255,.06)' }}>
       <div className="two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'center', marginBottom: 32 }}>
         <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
-          <Image src="/logo.png" alt="Housing PRO" width={40} height={40} style={{ objectFit: 'contain' }} />
+          <Image src="/Logo_Simbolo.PNG" alt="Housing PRO" width={40} height={40} style={{ objectFit: 'contain' }} />
           <div>
             <div style={{ fontWeight: 700, fontSize: 16 }}>
               Housing <span style={{ color: '#00ffff' }}>PRO</span>
@@ -37,8 +37,19 @@ export default function Footer() {
           ))}
         </div>
       </div>
-      <div style={{ textAlign: 'center', color: 'rgba(255,255,255,.2)', fontSize: 12, paddingTop: 20, borderTop: '1px solid rgba(255,255,255,.04)' }}>
-        © 2026 Housing PRO — Ecossistemas Digitais. Todos os direitos reservados.
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '6px 20px', paddingTop: 20, borderTop: '1px solid rgba(255,255,255,.04)', color: 'rgba(255,255,255,.2)', fontSize: 12 }}>
+        <span>© 2026 Housing PRO — Ecossistemas Digitais. Todos os direitos reservados.</span>
+        <a href="/termos-de-servico" style={{ color: 'rgba(255,255,255,.35)', textDecoration: 'none', transition: 'color .2s' }}
+          onMouseEnter={e => (e.currentTarget.style.color = '#00ffff')}
+          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,.35)')}>
+          Termos de Serviço
+        </a>
+        <span style={{ color: 'rgba(255,255,255,.1)' }}>·</span>
+        <a href="/politica-de-privacidade" style={{ color: 'rgba(255,255,255,.35)', textDecoration: 'none', transition: 'color .2s' }}
+          onMouseEnter={e => (e.currentTarget.style.color = '#00ffff')}
+          onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,.35)')}>
+          Política de Privacidade
+        </a>
       </div>
     </div>
   )
