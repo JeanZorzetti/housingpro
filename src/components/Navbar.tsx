@@ -39,7 +39,7 @@ export default function Navbar() {
           {/* Logo */}
           <a href="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
             <Image
-              src="/logo.png"
+              src="/Logo_Simbolo.PNG"
               alt="Housing PRO"
               width={52}
               height={52}
