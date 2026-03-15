@@ -12,7 +12,7 @@ export default function PageHero({ eyebrow, title, titleHighlight, subtitle, bre
   return (
     <section
       className="grid-bg hero-gradient"
-      style={{ paddingTop: 120, paddingBottom: 80, position: 'relative', overflow: 'hidden' }}
+      style={{ paddingTop: 128, paddingBottom: 80, position: 'relative', overflow: 'hidden' }}
     >
       {/* Bg orb */}
       <div style={{ position: 'absolute', top: '-20%', left: '50%', transform: 'translateX(-50%)', width: 600, height: 400, background: 'radial-gradient(ellipse, rgba(0,255,255,.05) 0%, transparent 70%)', pointerEvents: 'none' }} />

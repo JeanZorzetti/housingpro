@@ -3,7 +3,7 @@ export default function Hero() {
     <section
       id="home"
       className="grid-bg hero-gradient"
-      style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: 64, overflow: 'hidden' }}
+      style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: 72, overflow: 'hidden' }}
     >
       {/* Background orbs */}
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
