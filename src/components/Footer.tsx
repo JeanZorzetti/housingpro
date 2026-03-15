@@ -7,6 +7,7 @@ const navLinks = [
   { href: '/pilares', label: 'Pilares' },
   { href: '/servicos', label: 'Serviços' },
   { href: '/como-funciona', label: 'Como Funciona' },
+  { href: '/blog', label: 'Blog' },
   { href: '/contato', label: 'Contato' },
 ]
 
