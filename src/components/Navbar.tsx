@@ -27,10 +27,12 @@ export default function Navbar() {
     <nav
       style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-        background: '#ffffff',
-        borderBottom: '1px solid #e5e7eb',
+        background: 'rgba(0,0,51,.92)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(0,255,255,.1)',
         transition: 'box-shadow .3s',
-        boxShadow: scrolled ? '0 2px 16px rgba(0,0,0,.10)' : '0 1px 4px rgba(0,0,0,.06)',
+        boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,.4)' : 'none',
       }}
     >
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px' }}>
@@ -47,10 +49,10 @@ export default function Navbar() {
               priority
             />
             <div>
-              <div style={{ color: '#000033', fontWeight: 800, fontSize: 16, letterSpacing: '.02em', lineHeight: 1.2 }}>
-                Housing <span style={{ color: '#00aacc' }}>PRO</span>
+              <div style={{ color: '#fff', fontWeight: 800, fontSize: 16, letterSpacing: '.02em', lineHeight: 1.2 }}>
+                Housing <span style={{ color: '#00ffff' }}>PRO</span>
               </div>
-              <div style={{ color: '#00aacc', fontSize: 9, letterSpacing: '.14em', textTransform: 'uppercase', opacity: .8 }}>
+              <div style={{ color: 'rgba(0,255,255,.5)', fontSize: 9, letterSpacing: '.14em', textTransform: 'uppercase' }}>
                 Ecossistemas Digitais
               </div>
             </div>
@@ -60,9 +62,9 @@ export default function Navbar() {
           <div className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
             {links.map(l => (
               <a key={l.href} href={l.href}
-                style={{ color: '#374151', fontSize: 14, fontWeight: 500, textDecoration: 'none', transition: 'color .2s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#000033')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#374151')}
+                style={{ color: 'rgba(255,255,255,.7)', fontSize: 14, fontWeight: 500, textDecoration: 'none', transition: 'color .2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,.7)')}
               >
                 {l.label}
               </a>
@@ -71,14 +73,7 @@ export default function Navbar() {
 
           {/* CTA + Hamburger */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <a href="/contato" className="desktop-cta" style={{
-              padding: '9px 22px', borderRadius: 10, fontSize: 13, fontWeight: 700,
-              background: '#000033', color: '#fff', textDecoration: 'none',
-              transition: 'background .2s',
-            }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#00004d')}
-              onMouseLeave={e => (e.currentTarget.style.background = '#000033')}
-            >
+            <a href="/contato" className="btn-cyan desktop-cta" style={{ padding: '9px 22px', borderRadius: 10, fontSize: 13 }}>
               Solicitar Demo
             </a>
             <button
@@ -87,9 +82,9 @@ export default function Navbar() {
               style={{ display: 'none', flexDirection: 'column', gap: 5, padding: 8, background: 'none', border: 'none', cursor: 'pointer' }}
               className="hamburger-btn"
             >
-              <span style={{ display: 'block', width: 22, height: 2, background: '#000033', transition: 'all .3s ease', transform: open ? 'translateY(7px) rotate(45deg)' : 'none', transformOrigin: 'center' }} />
-              <span style={{ display: 'block', width: 22, height: 2, background: '#000033', transition: 'all .3s ease', opacity: open ? 0 : 1 }} />
-              <span style={{ display: 'block', width: 22, height: 2, background: '#000033', transition: 'all .3s ease', transform: open ? 'translateY(-7px) rotate(-45deg)' : 'none', transformOrigin: 'center' }} />
+              <span style={{ display: 'block', width: 22, height: 2, background: '#00ffff', transition: 'all .3s ease', transform: open ? 'translateY(7px) rotate(45deg)' : 'none', transformOrigin: 'center' }} />
+              <span style={{ display: 'block', width: 22, height: 2, background: '#00ffff', transition: 'all .3s ease', opacity: open ? 0 : 1 }} />
+              <span style={{ display: 'block', width: 22, height: 2, background: '#00ffff', transition: 'all .3s ease', transform: open ? 'translateY(-7px) rotate(-45deg)' : 'none', transformOrigin: 'center' }} />
             </button>
           </div>
         </div>
@@ -97,16 +92,16 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div style={{ background: '#fff', borderTop: '1px solid #e5e7eb' }}>
+        <div style={{ background: 'rgba(0,0,51,.97)', borderTop: '1px solid rgba(0,255,255,.1)' }}>
           <div style={{ padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: 2 }}>
             {links.map(l => (
               <a key={l.href} href={l.href} onClick={closeMenu}
-                style={{ padding: '12px 0', color: '#374151', fontWeight: 500, textDecoration: 'none', fontSize: 15, borderBottom: '1px solid #f3f4f6' }}
+                style={{ padding: '12px 0', color: 'rgba(255,255,255,.8)', fontWeight: 500, textDecoration: 'none', fontSize: 15, borderBottom: '1px solid rgba(255,255,255,.06)' }}
               >
                 {l.label}
               </a>
             ))}
-            <a href="/contato" onClick={closeMenu} style={{ marginTop: 12, padding: '13px', borderRadius: 10, fontSize: 14, fontWeight: 700, background: '#000033', color: '#fff', textDecoration: 'none', textAlign: 'center' }}>
+            <a href="/contato" onClick={closeMenu} className="btn-cyan" style={{ padding: 13, borderRadius: 10, fontSize: 14, marginTop: 10 }}>
               Solicitar Demo
             </a>
           </div>
