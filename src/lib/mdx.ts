@@ -7,13 +7,17 @@ const POSTS_DIR = path.join(process.cwd(), 'content/posts')
 export interface PostFrontMatter {
   slug: string
   title: string
-  excerpt: string
+  excerpt: string       // preview curto na listagem
+  description: string   // meta description SEO (120-160 chars)
   category: string
   readTime: string
   date: string          // ISO: "2026-03-10"
   dateFormatted: string // "10 mar 2026"
+  lastModified?: string // ISO — para schema.org dateModified
   author: { name: string; role: string; initials: string }
   tags: string[]
+  draft?: boolean
+  noindex?: boolean
 }
 
 export interface Post extends PostFrontMatter {
@@ -34,12 +38,16 @@ function parseFile(slug: string): PostFrontMatter {
     slug,
     title: data.title,
     excerpt: data.excerpt,
+    description: data.description ?? data.excerpt,
     category: data.category,
     readTime: data.readTime,
     date: data.date,
     dateFormatted: formatDate(data.date),
+    lastModified: data.lastModified,
     author: data.author,
     tags: data.tags ?? [],
+    draft: data.draft ?? false,
+    noindex: data.noindex ?? false,
   }
 }
 
@@ -48,6 +56,7 @@ export function getAllPosts(): PostFrontMatter[] {
     .readdirSync(POSTS_DIR)
     .filter(f => f.endsWith('.mdx'))
     .map(f => parseFile(f.replace('.mdx', '')))
+    .filter(p => !p.draft)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
@@ -56,10 +65,7 @@ export function getPost(slug: string): Post | null {
   if (!fs.existsSync(filepath)) return null
   const raw = fs.readFileSync(filepath, 'utf-8')
   const { data, content } = matter(raw)
-  return {
-    ...parseFile(slug),
-    content,
-  } as Post
+  return { ...parseFile(slug), content } as Post
 }
 
 export function getAllSlugs(): string[] {

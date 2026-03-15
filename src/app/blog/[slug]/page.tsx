@@ -16,15 +16,25 @@ export async function generateMetadata(
   const { slug } = await params
   const post = getPost(slug)
   if (!post) return { title: 'Post não encontrado — Housing PRO' }
+  const BASE_URL = 'https://housingpro-tau.vercel.app'
   return {
     title: `${post.title} — Housing PRO Blog`,
-    description: post.excerpt,
+    description: post.description,
+    robots: post.noindex ? 'noindex,nofollow' : 'index,follow',
+    alternates: { canonical: `${BASE_URL}/blog/${post.slug}` },
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description: post.description,
       type: 'article',
       publishedTime: post.date,
+      modifiedTime: post.lastModified ?? post.date,
       authors: [post.author.name],
+      tags: post.tags,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
     },
   }
 }
