@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const POSTS_DIR = path.join(__dirname, '..', 'content', 'posts')
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://sites-housing.tjmarr.easypanel.host'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'https://api.housingpro.com.br'
 
 // Minimal front matter parser (avoids gray-matter dependency issues)
 function parseFrontMatter(raw) {
